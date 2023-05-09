@@ -47,7 +47,8 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">UsersCRUD</h1>
-                    <a href="${pageContext.request.contextPath}/user/list" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    <a href="${pageContext.request.contextPath}/user/list"
+                       class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Lista użytkowników
                     </a>
                 </div>
@@ -60,21 +61,27 @@
                         <form method="post">
                             <div class="form-group">
                                 <label for="name">Nazwa <br>
-                                    <input type="text" minlength="2" maxlength="255" placeholder="Nazwa użytkownika" class="form-control" id="name">
+                                    <input type="text" name="name" minlength="2" maxlength="255"
+                                           placeholder="Nazwa użytkownika" class="form-control" id="name">
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email <br>
-                                    <input type="email" minlength="5" maxlength="255" placeholder="Email użytkownika" class="form-control" id="email">
+                                    <input type="email" name="email" minlength="5" maxlength="255"
+                                           placeholder="Email użytkownika" class="form-control" id="email">
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label for="password">Hasło <br>
-                                    <input type="password" class="form-control" placeholder="Hasło użytkownika" id="password" style="width: 100%">
+                                    <input type="password" name="password" class="form-control"
+                                           placeholder="Hasło użytkownika" id="password" style="width: 100%">
                                 </label>
                             </div>
                             <button type="submit" class="btn btn-primary">Zapisz</button>
                         </form>
+                        <c:if test="${created==true}">
+                            <p style="color: seagreen">Użytkownik stworzony pomyślnie.</p>
+                        </c:if>
                     </div>
                 </div>
             </div>

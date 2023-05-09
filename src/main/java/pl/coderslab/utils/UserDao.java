@@ -101,9 +101,8 @@ public class UserDao extends Queries {
         }
     }
 
-    public ArrayList<User> addToArray(User u, ArrayList<User> users) {
+    public void addToArray(User u, ArrayList<User> users) {
         users.add(u);
-        return users;
     }
 
     // --- UPDATE ---
