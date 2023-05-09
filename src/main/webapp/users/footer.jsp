@@ -5,9 +5,9 @@
 </head>
 <body>
 
-<footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
+<footer class="bg-white">
+    <div class="container">
+        <div class="text-center my-auto">
             <span>&copy; Your Website 2019</span>
         </div>
     </div>

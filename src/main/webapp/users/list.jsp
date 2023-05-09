@@ -1,15 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
+
 <!-- Header -->
 <%@ include file="/users/header.jsp" %>
 <!-- End of Header -->
+
 <body id="page-top">
 <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+           href="${pageContext.request.contextPath}/user/list">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -44,8 +47,9 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">UsersCRUD</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                        <i class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika </a>
+                    <a href="${pageContext.request.contextPath}/user/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika
+                    </a>
                 </div>
                 <!-- /.container-fluid -->
                 <div class="card shadow mb-4">
@@ -59,37 +63,40 @@
                                     <div class="col-sm-12">
                                         <table class="table table-bordered dataTable" id="dataTable" width="100%"
                                                cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                               style="width: 100%;">
+                                               style="width: 100%; border-collapse: collapse; border-left: none;">
                                             <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="dataTable"
+                                                <th tabindex="0" aria-controls="dataTable"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Name: activate to sort column descending"
-                                                    style="width: 134px;" aria-sort="ascending">Id
+                                                    style="width: auto; text-align: center" aria-sort="ascending">Id
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                <th tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" aria-label="Position: activate to sort column ascending"
-                                                    style="width: 209px;">Nazwa użytkownika
+                                                    style="width: fit-content">Nazwa użytkownika
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                <th tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" aria-label="Office: activate to sort column ascending"
-                                                    style="width: 94px;">Email
+                                                    style="width: fit-content">Email
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                <th tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" aria-label="Age: activate to sort column ascending"
-                                                    style="width: 38px;">Akcja
+                                                    style="width: fit-content">Akcja
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            <c:forEach items="${users}" var="user" >
-                                            <tr role="row">
-                                                <td class="sorting_1">${user.id}</td>
-                                                <td>${user.userName}</td>
-                                                <td>${user.email}</td>
-                                                <td><a href="/user/delete">Usuń </a><a href="/user/edit">Edytuj </a><a href="/user/showUser">Pokaż</a></td>
-                                            </tr>
+                                            <c:forEach items="${users}" var="user">
+                                                <tr role="row">
+                                                    <td style="text-align: center">${user.id}</td>
+                                                    <td>${user.userName}</td>
+                                                    <td>${user.email}</td>
+                                                    <td><a href="/user/showUser">Pokaż </a>|
+                                                        <a href="/user/edit">Edytuj </a>|
+                                                        <a href="/user/delete">Usuń</a>
+                                                    </td>
+                                                </tr>
                                             </c:forEach>
 
                                             </tbody>
@@ -102,10 +109,12 @@
                 </div>
             </div>
             <!-- End of Main Content -->
-            <!-- Footer -->
-            <%@ include file="/users/footer.jsp" %>
-            <!-- End of Footer -->
         </div>
+
+        <!-- Footer -->
+        <%@ include file="/users/footer.jsp" %>
+        <!-- End of Footer -->
+
         <!-- End of Content -->
     </div>
     <!-- End of Content Wrapper -->
