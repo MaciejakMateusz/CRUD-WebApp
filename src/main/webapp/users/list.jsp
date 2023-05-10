@@ -92,15 +92,17 @@
                                                     <td style="text-align: center">${user.id}</td>
                                                     <td>${user.userName}</td>
                                                     <td>${user.email}</td>
-                                                    <td><a href="/user/showUser">Pokaż </a>|
+                                                    <td><a href="${pageContext.request.contextPath}/user/show?id=${user.id}">Pokaż </a>|
                                                         <a href="/user/edit">Edytuj </a>|
                                                         <a href="/user/delete">Usuń</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
-
                                             </tbody>
                                         </table>
+                                        <c:if test="${userNotFound==true}">
+                                            <p style="color: red">Nie znaleziono użytkownika.</p>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>

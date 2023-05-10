@@ -47,41 +47,42 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">UsersCRUD</h1>
-                    <a href="${pageContext.request.contextPath}/user/list"
-                       class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Lista użytkowników
+                    <a href="${pageContext.request.contextPath}/user/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika
                     </a>
                 </div>
                 <!-- /.container-fluid -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Dodaj użytkownika</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Szczegóły użytkownika</h6>
                     </div>
                     <div class="card-body">
-                        <form method="post">
-                            <div class="form-group">
-                                <label for="name">Nazwa <br>
-                                    <input type="text" name="name" minlength="2" maxlength="255"
-                                           placeholder="Nazwa użytkownika" class="form-control" id="name">
-                                </label>
+                        <div class="table-responsive">
+                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                               cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                               style="width: 100%; border-collapse: collapse; border-left: none;">
+                                            <tbody>
+                                            <tr>
+                                                <td><strong>Id</strong></td>
+                                                <td>${user.id}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Nazwa użytkownika</strong></td>
+                                                <td>${user.userName}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Email</strong></td>
+                                                <td>${user.email}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email <br>
-                                    <input type="email" name="email" minlength="5" maxlength="255"
-                                           placeholder="Email użytkownika" class="form-control" id="email">
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Hasło <br>
-                                    <input type="password" name="password" class="form-control"
-                                           placeholder="Hasło użytkownika" id="password" style="width: 100%">
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Zapisz</button>
-                        </form>
-                        <c:if test="${created==true}">
-                            <p class="confirmation">Użytkownik utworzony pomyślnie.</p>
-                        </c:if>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,4 +100,5 @@
 <!-- End of Page Wrapper -->
 
 </body>
+
 </html>
