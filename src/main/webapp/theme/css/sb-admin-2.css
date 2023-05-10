@@ -10990,3 +10990,41 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
     width: 100%;
 }
+
+.link-form {
+    display: none;
+}
+
+a {
+    color: blue;
+    cursor: pointer;
+}
+
+.button-list {
+    background-color: #4e73df;
+    color: white;
+    border: 1px #4e73df;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    box-shadow: rgba(58, 59, 69, 0.2) 0px 2px 4px 0px;
+}
+
+.button-list:hover {
+    color: #fff;
+    background-color: #2e59d9;
+    border-color: #2653d4;
+}
+
+button-list:active {
+    color: #fff;
+    background-color: #2e59d9;
+    border-color: #2653d4;
+}
+
+button-list:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
+}

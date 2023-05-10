@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html lang="en">
+<html lang="pl">
 
 <!-- Header -->
 <%@ include file="/users/header.jsp" %>
@@ -47,7 +47,8 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">UsersCRUD</h1>
-                    <a href="${pageContext.request.contextPath}/user/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    <a href="${pageContext.request.contextPath}/user/create"
+                       class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika
                     </a>
                 </div>
@@ -64,20 +65,25 @@
                                         <table class="table table-bordered dataTable" id="dataTable" width="100%"
                                                cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                style="width: 100%; border-collapse: collapse; border-left: none;">
-                                            <tbody>
-                                            <tr>
-                                                <td><strong>Id</strong></td>
-                                                <td>${user.id}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Nazwa użytkownika</strong></td>
-                                                <td>${user.userName}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Email</strong></td>
-                                                <td>${user.email}</td>
-                                            </tr>
-                                            </tbody>
+                                            <c:if test="${userNotFound==true}">
+                                                <p style="color: red">Nie znaleziono użytkownika.</p>
+                                            </c:if>
+                                            <c:if test="${userNotFound!=true}">
+                                                <tbody>
+                                                <tr>
+                                                    <td><strong>Id</strong></td>
+                                                    <td>${user.id}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Nazwa użytkownika</strong></td>
+                                                    <td>${user.userName}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Email</strong></td>
+                                                    <td>${user.email}</td>
+                                                </tr>
+                                                </tbody>
+                                            </c:if>
                                         </table>
                                     </div>
                                 </div>

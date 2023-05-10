@@ -13,22 +13,31 @@ import java.util.ArrayList;
 @WebServlet(name = "UserShow", urlPatterns = "/user/show")
 public class UserShow extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String StringId = request.getParameter("id");
+        String stringId = request.getParameter("id");
+
+        UserDao userDao = new UserDao();
+        ArrayList<User> users = userDao.findAll();
 
         int id = 0;
         try {
-            id = Integer.parseInt(StringId);
+            id = Integer.parseInt(stringId);
         } catch (NumberFormatException e) {
             request.setAttribute("userNotFound", true);
-            getServletContext().getRequestDispatcher("/users/list.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
+            return;
         }
 
-        UserDao userDao = new UserDao();
-        User user = userDao.read(id);
+        for (User user : users) {
+            if (user.getId() == id) {
+                request.setAttribute("user", user);
+                getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
+                return;
+            }
+        }
 
-        request.setAttribute("user", user);
+        request.setAttribute("userNotFound", true);
         getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
     }
 }

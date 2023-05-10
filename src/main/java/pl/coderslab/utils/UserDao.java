@@ -1,7 +1,9 @@
 package pl.coderslab.utils;
 
 import org.mindrot.jbcrypt.BCrypt;
+import pl.coderslab.exceptions.UserNotFoundException;
 import pl.coderslab.users.User;
+import pl.coderslab.users.UserShow;
 
 import java.sql.*;
 import java.util.ArrayList;

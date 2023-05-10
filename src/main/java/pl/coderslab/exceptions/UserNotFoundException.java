@@ -1,4 +1,4 @@
-package pl.coderslab.utils;
+package pl.coderslab.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
 

@@ -61,26 +61,26 @@
                         <form method="post">
                             <div class="form-group">
                                 <label for="name">Nazwa <br>
-                                    <input type="text" name="name" minlength="2" maxlength="255" required
-                                           placeholder="Nazwa użytkownika" class="form-control" id="name">
+                                    <input type="text" name="name" minlength="2" maxlength="255"
+                                           value="${name}" class="form-control" id="name">
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email <br>
-                                    <input type="email" name="email" minlength="5" maxlength="255" required
-                                           placeholder="Email użytkownika" class="form-control" id="email">
+                                    <input type="email" name="email" minlength="5" maxlength="255"
+                                           value="${email}" class="form-control" id="email">
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label for="password">Hasło <br>
-                                    <input type="password" name="password" class="form-control" minlength="5"
-                                           maxlength="60" required placeholder="Hasło użytkownika" id="password">
+                                    <input type="password" name="password" minlength="5" maxlength="60" class="form-control"
+                                           placeholder="Nowe hasło" id="password">
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                            <button type="submit" class="btn btn-primary" name ="id" value="${id}">Edytuj</button>
                         </form>
-                        <c:if test="${created==true}">
-                            <p class="confirmation">Użytkownik utworzony pomyślnie.</p>
+                        <c:if test="${updated==true}">
+                            <p class="confirmation">Dane zaktualizowane pomyślnie.</p>
                         </c:if>
                     </div>
                 </div>

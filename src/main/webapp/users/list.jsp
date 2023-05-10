@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html lang="en">
-
+<html lang="pl">
 <!-- Header -->
 <%@ include file="/users/header.jsp" %>
 <!-- End of Header -->
@@ -47,14 +46,15 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">UsersCRUD</h1>
-                    <a href="${pageContext.request.contextPath}/user/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    <a href="${pageContext.request.contextPath}/user/create"
+                       class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika
                     </a>
                 </div>
                 <!-- /.container-fluid -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Lista użytkowników</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Edycja użytkownika</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -73,36 +73,43 @@
                                                 </th>
                                                 <th tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" aria-label="Position: activate to sort column ascending"
-                                                    style="width: fit-content">Nazwa użytkownika
+                                                    style="width: auto">Nazwa użytkownika
                                                 </th>
                                                 <th tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" aria-label="Office: activate to sort column ascending"
-                                                    style="width: fit-content">Email
+                                                    style="width: auto">Email
                                                 </th>
                                                 <th tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1" aria-label="Age: activate to sort column ascending"
-                                                    style="width: fit-content">Akcja
+                                                    style="width: auto;">Akcja
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
-
                                             <c:forEach items="${users}" var="user">
                                                 <tr role="row">
                                                     <td style="text-align: center">${user.id}</td>
                                                     <td>${user.userName}</td>
                                                     <td>${user.email}</td>
-                                                    <td><a href="${pageContext.request.contextPath}/user/show?id=${user.id}">Pokaż </a>|
-                                                        <a href="/user/edit">Edytuj </a>|
-                                                        <a href="/user/delete">Usuń</a>
+                                                    <td>
+                                                        <a style="all:unset"
+                                                           href="${pageContext.request.contextPath}/user/show?id=${user.id}">
+                                                            <button style="outline: none;" class="button-list">Pokaż</button>
+                                                        </a>
+                                                        <a style="all:unset"
+                                                           href="${pageContext.request.contextPath}/user/update?id=${user.id}">
+                                                            <button style="outline: none;" class="button-list">Edytuj</button>
+                                                        </a>
+                                                        <form action="${pageContext.request.contextPath}/user/delete"
+                                                              method="post" style="all: unset">
+                                                            <button type="submit" name="id" style="outline: none;" class="button-list" value="${user.id}">Usuń
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
                                         </table>
-                                        <c:if test="${userNotFound==true}">
-                                            <p style="color: red">Nie znaleziono użytkownika.</p>
-                                        </c:if>
                                     </div>
                                 </div>
                             </div>
