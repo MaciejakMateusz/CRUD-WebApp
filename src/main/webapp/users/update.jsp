@@ -61,23 +61,35 @@
                         <form method="post">
                             <div class="form-group">
                                 <label for="name">Nazwa <br>
-                                    <input type="text" name="name" minlength="2" maxlength="255"
+                                    <input type="text" name="name"
                                            value="${name}" class="form-control" id="name">
                                 </label>
+                                <c:if test="${validUserName==false}">
+                                    <p class="validation" style="font-size: 0.7rem">Nazwa użytkownika musi składać się z
+                                        minimum 5 znaków</p>
+                                </c:if>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email <br>
-                                    <input type="email" name="email" minlength="5" maxlength="255"
+                                    <input type="text" name="email"
                                            value="${email}" class="form-control" id="email">
                                 </label>
+                                <c:if test="${validEmail==false}">
+                                    <p class="validation" style="font-size: 0.7rem">Niepoprawny email</p>
+                                </c:if>
                             </div>
                             <div class="form-group">
                                 <label for="password">Hasło <br>
-                                    <input type="password" name="password" minlength="5" maxlength="60" class="form-control"
-                                           placeholder="Nowe hasło" id="password">
+                                    <input type="password" name="password" class="form-control"
+                                           placeholder="Nowe hasło" value="${password}" id="password">
                                 </label>
+                                <c:if test="${validPassword==false}">
+                                    <p class="validation" style="font-size: 0.7rem">Hasło musi posiadać: <br> - od 5 do
+                                        60 znaków<br> - minimum 1 małą literę<br> - minimum 1 dużą literę<br> - minimum
+                                        jeden znak specjalny</p>
+                                </c:if>
                             </div>
-                            <button type="submit" class="btn btn-primary" name ="id" value="${id}">Edytuj</button>
+                            <button type="submit" class="btn btn-primary" name="id" value="${id}">Edytuj</button>
                         </form>
                         <c:if test="${updated==true}">
                             <p class="confirmation">Dane zaktualizowane pomyślnie.</p>

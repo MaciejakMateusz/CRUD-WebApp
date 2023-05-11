@@ -3,7 +3,6 @@ package pl.coderslab.utils;
 import org.mindrot.jbcrypt.BCrypt;
 import pl.coderslab.exceptions.UserNotFoundException;
 import pl.coderslab.users.User;
-import pl.coderslab.users.UserShow;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -113,9 +112,15 @@ public class UserDao extends Queries {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_USER_QUERY)
         ) {
+            User userFromDB = read(user.getId());
+
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getUserName());
-            statement.setString(3, hashPassword(user.getPassword()));
+            if (userFromDB.getPassword().equals(user.getPassword())) {
+                statement.setString(3, user.getPassword());
+            } else {
+                statement.setString(3, hashPassword(user.getPassword()));
+            }
             statement.setInt(4, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
