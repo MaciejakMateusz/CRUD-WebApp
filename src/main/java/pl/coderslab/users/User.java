@@ -2,18 +2,9 @@ package pl.coderslab.users;
 
 public class User {
     private int id;
-    private String email, userName, password;
-    private String creationDate;
-    private String lastEdited;
+    private String email, userName, password, creationDate, lastEdited;
 
     public User() {
-    }
-
-    public User(int id, String email, String userName, String password) {
-        this.id = id;
-        this.email = email;
-        this.userName = userName;
-        this.password = password;
     }
 
     public User(int id, String email, String userName, String password, String creationDate, String lastEdited) {
@@ -23,12 +14,6 @@ public class User {
         this.password = password;
         this.creationDate = creationDate;
         this.lastEdited = lastEdited;
-    }
-
-    public User(String email, String userName, String password) {
-        this.email = email;
-        this.userName = userName;
-        this.password = password;
     }
 
     public int getId() {

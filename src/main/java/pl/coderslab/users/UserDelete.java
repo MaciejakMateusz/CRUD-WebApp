@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 
 @WebServlet(name = "UserDelete", urlPatterns = "/user/delete")
 public class UserDelete extends HttpServlet {
@@ -29,31 +31,28 @@ public class UserDelete extends HttpServlet {
         }
 
         UserDao userDao = new UserDao();
-        User user = userDao.read(id);
+        ArrayList<User> users = userDao.findAll();
 
-        request.setAttribute("user", user);
-        request.setAttribute("deleted", false);
-        getServletContext().getRequestDispatcher(URL_DELETE).forward(request, response);
+        for (User user : users) {
+            if (user.getId() == id) {
+                request.setAttribute("user", user);
+                request.setAttribute("deleted", false);
+                getServletContext().getRequestDispatcher(URL_DELETE).forward(request, response);
+                return;
+            }
+        }
+
+        request.setAttribute("userNotFound", true);
+        getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
-        String stringId = request.getParameter("id");
-        String stringIsConfirmed = request.getParameter("isConfirmed");
 
+        int id = Integer.parseInt(request.getParameter("id"));
+        boolean isConfirmed = Boolean.parseBoolean(request.getParameter("isConfirmed"));
 
-        boolean isConfirmed = Boolean.parseBoolean(stringIsConfirmed);
-
-        int id;
-        try {
-            id = Integer.parseInt(stringId);
-        } catch (NumberFormatException e) {
-            request.setAttribute("userNotFound", true);
-            getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
-            return;
-        }
 
         if (isConfirmed) {
             UserDao userDao = new UserDao();

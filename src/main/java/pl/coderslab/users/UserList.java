@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class UserList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         UserDao userDao = new UserDao();
         ArrayList<User> users = userDao.findAll();
         request.setAttribute("users", users);

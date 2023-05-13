@@ -17,21 +17,10 @@ public class UserShow extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
-
-        String stringId = request.getParameter("id");
+        int id = Integer.parseInt(request.getParameter("id"));
 
         UserDao userDao = new UserDao();
         ArrayList<User> users = userDao.findAll();
-
-        int id = 0;
-        try {
-            id = Integer.parseInt(stringId);
-        } catch (NumberFormatException e) {
-            request.setAttribute("userNotFound", true);
-            getServletContext().getRequestDispatcher(URL_SHOW).forward(request, response);
-            return;
-        }
 
         for (User user : users) {
             if (user.getId() == id) {

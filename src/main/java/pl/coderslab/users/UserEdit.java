@@ -29,18 +29,7 @@ public class UserEdit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
-
-        String stringId = request.getParameter("id");
-
-        int id = 0;
-        try {
-            id = Integer.parseInt(stringId);
-        } catch (NumberFormatException e) {
-            request.setAttribute("userNotFound", true);
-            getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
-            return;
-        }
+        int id = Integer.parseInt(request.getParameter("id"));
 
         UserDao userDao = new UserDao();
         User user = userDao.read(id);
