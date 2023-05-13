@@ -8,22 +8,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@WebServlet(name = "UserCreate", urlPatterns = "/user/create")
-public class UserCreate extends HttpServlet {
+@WebServlet(name = "UserCreate", urlPatterns = "/user/add")
+public class UserAdd extends HttpServlet {
 
+    private static final String URL_ADD = "/users/add.jsp";
     private static final Pattern USERNAME_REGEX =
             Pattern.compile("^\\S{5,255}$");
     private static final Pattern EMAIL_REGEX =
             Pattern.compile("^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,})$");
     private static final Pattern PASSWORD_REGEX =
             Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\w\\s]).{5,20}$");
+    private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/users/create.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher(URL_ADD).forward(request, response);
     }
 
     @Override
@@ -41,6 +45,9 @@ public class UserCreate extends HttpServlet {
 
         formValidation(request, name, email, password, validUserName, validEmail, validPassword, user);
 
+        user.setCreationDate(DTF.format(LocalDateTime.now()));
+        user.setLastEdited(DTF.format(LocalDateTime.now()));
+
         if (validUserName && validEmail && validPassword) {
 
             UserDao userDao = new UserDao();
@@ -50,9 +57,9 @@ public class UserCreate extends HttpServlet {
             request.setAttribute("email", "");
             request.setAttribute("password", "");
             request.setAttribute("created", true);
-            getServletContext().getRequestDispatcher("/users/create.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher(URL_ADD).forward(request, response);
         } else {
-            getServletContext().getRequestDispatcher("/users/create.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher(URL_ADD).forward(request, response);
         }
 
 
@@ -73,7 +80,14 @@ public class UserCreate extends HttpServlet {
         return matcher.matches();
     }
 
-    static void formValidation(HttpServletRequest request, String name, String email, String password, boolean validUserName, boolean validEmail, boolean validPassword, User user) {
+    static void formValidation(HttpServletRequest request,
+                               String name,
+                               String email,
+                               String password,
+                               boolean validUserName,
+                               boolean validEmail,
+                               boolean validPassword,
+                               User user) {
         if (validUserName) {
             user.setUserName(name);
             request.setAttribute("userName", name);

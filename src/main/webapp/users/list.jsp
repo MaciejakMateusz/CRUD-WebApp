@@ -46,7 +46,7 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">UsersCRUD</h1>
-                    <a href="${pageContext.request.contextPath}/user/create"
+                    <a href="${pageContext.request.contextPath}/user/add"
                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika
                     </a>
@@ -94,17 +94,19 @@
                                                     <td>
                                                         <a style="all:unset"
                                                            href="${pageContext.request.contextPath}/user/show?id=${user.id}">
-                                                            <button style="outline: none;" class="button-list">Pokaż</button>
+                                                            <button style="outline: none;" class="button-list">Pokaż
+                                                            </button>
                                                         </a>
                                                         <a style="all:unset"
-                                                           href="${pageContext.request.contextPath}/user/update?id=${user.id}">
-                                                            <button style="outline: none;" class="button-list">Edytuj</button>
-                                                        </a>
-                                                        <form action="${pageContext.request.contextPath}/user/delete"
-                                                              method="post" style="all: unset">
-                                                            <button type="submit" name="id" style="outline: none;" class="button-list" value="${user.id}">Usuń
+                                                           href="${pageContext.request.contextPath}/user/edit?id=${user.id}">
+                                                            <button style="outline: none;" class="button-list">Edytuj
                                                             </button>
-                                                        </form>
+                                                        </a>
+                                                        <a style="all:unset"
+                                                           href="${pageContext.request.contextPath}/user/delete?id=${user.id}">
+                                                            <button style="outline: none;" class="button-list">Usuń
+                                                            </button>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

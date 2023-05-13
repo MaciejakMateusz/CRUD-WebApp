@@ -47,15 +47,16 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">UsersCRUD</h1>
-                    <a href="${pageContext.request.contextPath}/user/add"
+                    <a href="${pageContext.request.contextPath}/user/list"
                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika
+                            class="fas fa-download fa-sm text-white-50"></i> Lista użytkowników
                     </a>
                 </div>
                 <!-- /.container-fluid -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Szczegóły użytkownika</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Potwierdź usunięcie
+                            użytkownika</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -65,34 +66,45 @@
                                         <table class="table table-bordered dataTable" id="dataTable" width="100%"
                                                cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                style="width: 100%; border-collapse: collapse; border-left: none;">
-                                            <c:if test="${userNotFound==true}">
-                                                <p style="color: red">Nie znaleziono użytkownika.</p>
+                                            <c:if test="${deleted==true}">
+                                                <p style="color: green">Użytkownik został usunięty.</p>
                                             </c:if>
-                                            <c:if test="${userNotFound!=true}">
-                                                <tbody>
-                                                <tr>
-                                                    <td><strong>Id</strong></td>
-                                                    <td>${user.id}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Nazwa użytkownika</strong></td>
-                                                    <td>${user.userName}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Email</strong></td>
-                                                    <td>${user.email}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Data utworzenia</strong></td>
-                                                    <td>${user.creationDate}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Ostatnio edytowano</strong></td>
-                                                    <td>${user.lastEdited}</td>
-                                                </tr>
-                                                </tbody>
+                                            <c:if test="${deleted==false}">
+                                            <tbody>
+                                            <tr>
+                                                <td><strong>Id</strong></td>
+                                                <td>${user.id}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Nazwa użytkownika</strong></td>
+                                                <td>${user.userName}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Email</strong></td>
+                                                <td>${user.email}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Data utworzenia</strong></td>
+                                                <td>${user.creationDate}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Ostatnio edytowano</strong></td>
+                                                <td>${user.lastEdited}</td>
+                                            </tr>
+                                            </tbody>
                                             </c:if>
                                         </table>
+                                        <c:if test="${deleted==false}">
+                                            <form method="post">
+                                                <p>Czy potwierdzasz usunięcie tego użytkownika?<br></p>
+                                                <button type="submit" style="outline: none;" class="button-list"
+                                                        name="isConfirmed" value="false">Nie
+                                                </button>
+                                                <button type="submit" style="outline: none;" class="button-list"
+                                                        name="isConfirmed" value="true">Tak
+                                                </button>
+                                            </form>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>

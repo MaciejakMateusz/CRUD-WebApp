@@ -23,6 +23,8 @@ public class UserDao extends Queries {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getUserName());
             statement.setString(3, hashPassword(user.getPassword()));
+            statement.setString(4, user.getCreationDate());
+            statement.setString(5, user.getLastEdited());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -40,7 +42,9 @@ public class UserDao extends Queries {
         String username = resultSet.getString("username");
         String email = resultSet.getString("email");
         String password = resultSet.getString("password");
-        return new User(id, email, username, password);
+        String creationDate = resultSet.getString("creationDate");
+        String lastEdited = resultSet.getString("lastEdited");
+        return new User(id, email, username, password, creationDate, lastEdited);
     }
 
     // --- READ ---
@@ -55,31 +59,6 @@ public class UserDao extends Queries {
                     return createUser(resultSet);
                 } else {
                     throw new UserNotFoundException(id);
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public User readEmail(String email) {
-        return getUser(email, READ_EMAIL_QUERY);
-    }
-
-    public User readUsername(String username) {
-        return getUser(username, READ_USERNAME_QUERY);
-    }
-
-    private User getUser(String username, String readUsernameQuery) {
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(readUsernameQuery)
-        ) {
-            statement.setString(1, username);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return createUser(resultSet);
-                } else {
-                    throw new UserNotFoundException(username);
                 }
             }
         } catch (SQLException e) {
@@ -121,7 +100,8 @@ public class UserDao extends Queries {
             } else {
                 statement.setString(3, hashPassword(user.getPassword()));
             }
-            statement.setInt(4, user.getId());
+            statement.setString(4, user.getLastEdited());
+            statement.setInt(5, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

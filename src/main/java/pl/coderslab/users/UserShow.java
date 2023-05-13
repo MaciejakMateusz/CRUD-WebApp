@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 @WebServlet(name = "UserShow", urlPatterns = "/user/show")
 public class UserShow extends HttpServlet {
+    private static final String URL_SHOW = "/users/show.jsp";
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -27,19 +29,19 @@ public class UserShow extends HttpServlet {
             id = Integer.parseInt(stringId);
         } catch (NumberFormatException e) {
             request.setAttribute("userNotFound", true);
-            getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher(URL_SHOW).forward(request, response);
             return;
         }
 
         for (User user : users) {
             if (user.getId() == id) {
                 request.setAttribute("user", user);
-                getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher(URL_SHOW).forward(request, response);
                 return;
             }
         }
 
         request.setAttribute("userNotFound", true);
-        getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher(URL_SHOW).forward(request, response);
     }
 }
