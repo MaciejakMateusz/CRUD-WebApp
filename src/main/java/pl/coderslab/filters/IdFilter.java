@@ -10,13 +10,14 @@ public class IdFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
+
         String stringId = request.getParameter("id");
 
         if (Objects.isNull(stringId)) {
             chain.doFilter(request, response);
         }
 
-        int id = 0;
+        int id;
         try {
             id = Integer.parseInt(stringId);
         } catch (NumberFormatException e) {
@@ -24,6 +25,7 @@ public class IdFilter implements Filter {
             request.getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
             return;
         }
+
 
         request.setAttribute("id", id);
         chain.doFilter(request, response);

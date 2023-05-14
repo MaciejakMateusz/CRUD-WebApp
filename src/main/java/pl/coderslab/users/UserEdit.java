@@ -29,7 +29,11 @@ public class UserEdit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter("id"));
+
+        int id = 0;
+        if (Objects.nonNull(request.getParameter("id"))) {
+            id = Integer.parseInt(request.getParameter("id"));
+        }
 
         UserDao userDao = new UserDao();
         User user = userDao.read(id);
@@ -49,7 +53,7 @@ public class UserEdit extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        int id = 0;
+        int id;
         try {
             id = Integer.parseInt(stringId);
         } catch (NumberFormatException e) {

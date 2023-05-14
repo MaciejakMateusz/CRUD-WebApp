@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @WebServlet(name = "UserDelete", urlPatterns = "/user/delete")
 public class UserDelete extends HttpServlet {
@@ -19,15 +19,9 @@ public class UserDelete extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String stringId = request.getParameter("id");
-
-        int id;
-        try {
-            id = Integer.parseInt(stringId);
-        } catch (NumberFormatException e) {
-            request.setAttribute("userNotFound", true);
-            getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);
-            return;
+        int id = 0;
+        if (Objects.nonNull(request.getParameter("id"))) {
+            id = Integer.parseInt(request.getParameter("id"));
         }
 
         UserDao userDao = new UserDao();
@@ -49,10 +43,11 @@ public class UserDelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = 0;
+        if (Objects.nonNull(request.getParameter("id"))) {
+            id = Integer.parseInt(request.getParameter("id"));
+        }
         boolean isConfirmed = Boolean.parseBoolean(request.getParameter("isConfirmed"));
-
 
         if (isConfirmed) {
             UserDao userDao = new UserDao();
