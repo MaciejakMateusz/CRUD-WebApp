@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @WebServlet(name = "UserShow", urlPatterns = "/user/show")
 public class UserShow extends HttpServlet {
@@ -17,7 +18,11 @@ public class UserShow extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = 0;
+        if (Objects.nonNull(request.getParameter("id"))) {
+            id = Integer.parseInt(request.getParameter("id"));
+        }
+
 
         UserDao userDao = new UserDao();
         ArrayList<User> users = userDao.findAll();
