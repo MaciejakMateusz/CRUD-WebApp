@@ -27,6 +27,12 @@ public class UserShow extends HttpServlet {
         UserDao userDao = new UserDao();
         ArrayList<User> users = userDao.findAll();
 
+        if (Objects.isNull(users)) {
+            request.setAttribute("userNotFound", true);
+            getServletContext().getRequestDispatcher(URL_SHOW).forward(request, response);
+            return;
+        }
+
         for (User user : users) {
             if (user.getId() == id) {
                 request.setAttribute("user", user);
