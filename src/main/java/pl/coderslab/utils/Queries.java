@@ -6,6 +6,8 @@ public class Queries extends DbUtil {
             "INSERT INTO users(email, username, password, creationDate, lastEdited) VALUES (?, ?, ?, ?, ?)";
     protected static final String READ_ID_QUERY =
             "SELECT * FROM users WHERE id = ?";
+    protected static final String READ_EMAIL_QUERY =
+            "SELECT * FROM users WHERE email = ?";
     protected static final String REMOVE_USER_QUERY =
             "DELETE FROM users WHERE id = ?";
     protected static final String UPDATE_USER_QUERY =

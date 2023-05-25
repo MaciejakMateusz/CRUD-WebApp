@@ -1,6 +1,7 @@
 package pl.coderslab.users;
 
 import pl.coderslab.utils.UserDao;
+import pl.coderslab.utils.ValidateData;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @WebServlet(name = "UserCreate", urlPatterns = "/user/add")
 public class UserAdd extends HttpServlet {
 
     private static final String URL_ADD = "/users/add.jsp";
-    private static final Pattern USERNAME_REGEX =
-            Pattern.compile("^\\S{5,255}$");
-    private static final Pattern EMAIL_REGEX =
-            Pattern.compile("^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,})$");
-    private static final Pattern PASSWORD_REGEX =
-            Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\w\\s]).{5,20}$");
     private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Override
@@ -38,9 +31,9 @@ public class UserAdd extends HttpServlet {
         String password = request.getParameter("password");
 
         User user = new User();
-        boolean validUserName = validateUserName(name);
-        boolean validEmail = validateEmail(email);
-        boolean validPassword = validatePassword(password);
+        boolean validUserName = ValidateData.validateUserName(name);
+        boolean validEmail = ValidateData.validateEmail(email);
+        boolean validPassword = ValidateData.validatePassword(password);
 
         formValidation(request, name, email, password, validUserName, validEmail, validPassword, user);
 
@@ -61,22 +54,6 @@ public class UserAdd extends HttpServlet {
             getServletContext().getRequestDispatcher(URL_ADD).forward(request, response);
         }
 
-
-    }
-
-    private static boolean validateUserName(String userName) {
-        Matcher matcher = USERNAME_REGEX.matcher(userName);
-        return matcher.matches();
-    }
-
-    private static boolean validateEmail(String email) {
-        Matcher matcher = EMAIL_REGEX.matcher(email);
-        return matcher.matches();
-    }
-
-    private static boolean validatePassword(String password) {
-        Matcher matcher = PASSWORD_REGEX.matcher(password);
-        return matcher.matches();
     }
 
     static void formValidation(HttpServletRequest request,

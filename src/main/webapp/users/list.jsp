@@ -26,6 +26,10 @@
                 <span>Dashboard</span>
             </a>
             <hr class="sidebar-divider">
+            <a class="nav-link" href="${pageContext.request.contextPath}/user/login">
+                <i class="fas fa-fw"></i>
+                <p>Logout</p>
+            </a>
         </li>
         <!-- Divider -->
     </ul>

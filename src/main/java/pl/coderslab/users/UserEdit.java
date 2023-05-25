@@ -1,6 +1,7 @@
 package pl.coderslab.users;
 
 import pl.coderslab.utils.UserDao;
+import pl.coderslab.utils.ValidateData;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,12 +19,6 @@ import java.util.regex.Pattern;
 public class UserEdit extends HttpServlet {
 
     private static final String URL_EDIT = "/users/edit.jsp";
-    private static final Pattern USERNAME_REGEX =
-            Pattern.compile("^\\S{5,255}$");
-    private static final Pattern EMAIL_REGEX =
-            Pattern.compile("^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,})$");
-    private static final Pattern PASSWORD_REGEX =
-            Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\w\\s]).{5,60}$");
     private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Override
@@ -65,9 +60,9 @@ public class UserEdit extends HttpServlet {
         User user = new User();
         user.setId(id);
 
-        boolean validUserName = validateUserName(name);
-        boolean validEmail = validateEmail(email);
-        boolean validPassword = validatePassword(password);
+        boolean validUserName = ValidateData.validateUserName(name);
+        boolean validEmail = ValidateData.validateEmail(email);
+        boolean validPassword = ValidateData.validatePassword(password);
 
         UserAdd.formValidation(request, name, email, password, validUserName, validEmail, validPassword, user);
 
@@ -86,21 +81,6 @@ public class UserEdit extends HttpServlet {
             getServletContext().getRequestDispatcher(URL_EDIT).forward(request, response);
         }
         getServletContext().getRequestDispatcher(URL_EDIT).forward(request, response);
-    }
-
-    private static boolean validateUserName(String userName) {
-        Matcher matcher = USERNAME_REGEX.matcher(userName);
-        return matcher.matches();
-    }
-
-    private static boolean validateEmail(String email) {
-        Matcher matcher = EMAIL_REGEX.matcher(email);
-        return matcher.matches();
-    }
-
-    private static boolean validatePassword(String password) {
-        Matcher matcher = PASSWORD_REGEX.matcher(password);
-        return matcher.matches();
     }
 
 }

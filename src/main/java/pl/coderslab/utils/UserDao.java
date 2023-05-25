@@ -66,6 +66,23 @@ public class UserDao extends Queries {
         }
     }
 
+    public User readByEmail(String email) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_EMAIL_QUERY)
+        ) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return createUser(resultSet);
+                } else {
+                    throw new UserNotFoundException(email);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public ArrayList<User> findAll() {
         try (PreparedStatement statement = getConnection().prepareStatement(READ_ALL_QUERY);
              ResultSet resultSet = statement.executeQuery()) {
@@ -120,6 +137,5 @@ public class UserDao extends Queries {
         }
         System.out.println("Successfully deleted entry");
     }
-
 
 }
