@@ -12,8 +12,8 @@ frontend design.
 
 ## Learning Journey
 During the development of this project, I dedicated 5 months to learning Java, 
-1 month to HTML and CSS, and 3 months to MySQL. Through this journey, I acquired 
-essential skills and knowledge in these technologies, which helped me create this 
+1 month to HTML and CSS, 3 months to MySQL, 1 month to JavaScript. Through this journey, 
+I acquired essential skills and knowledge in these technologies, which helped me create this 
 functional web application.
 
 ## Technologies Used
@@ -29,6 +29,7 @@ content rendering and server-side logic.
 sessions, and filters for user management.
 - **HTML/CSS**: Utilized for creating the frontend structure and styling of the web 
 application.
+- **JavaScript**: Helped only with navigating browser history. Used on a button.
 
 ## Functionalities
 The web application includes the following functionalities:
