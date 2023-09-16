@@ -7,7 +7,7 @@
               password="coderslab"
               driverClassName="com.mysql.jdbc.Driver"
               connectionProperties="useUnicode=yes;characterEncoding=utf8;serverTimezone=UTC"
-              url="jdbc:mysql://localhost:3306/small_database"
+              url="jdbc:mysql://mysql:3306/users_database"
               maxTotal="100"
               maxIdle="30"
               maxWaitMillis="10000" />
