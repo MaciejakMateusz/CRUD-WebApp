@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  users-db:
+    image: mysql/mysql-server:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: coderslab
+      MYSQL_DATABASE: users_database
+      MYSQL_USER: root
+      MYSQL_PASSWORD: coderslab
+    ports:
+      - "80:3306"
+
+  user-crud:
+    image: maciejak/crud-webapp:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - users-db
