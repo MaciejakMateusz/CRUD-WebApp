@@ -30,6 +30,8 @@ public class AppList extends HttpServlet {
         HttpSession session = request.getSession();
         UserDao userDao = new UserDao();
 
+
+
         int sessionUserId = (int) session.getAttribute("user");
         User sessionUser = userDao.read(sessionUserId);
         if (sessionUser.isAdmin()) {
@@ -64,7 +66,7 @@ public class AppList extends HttpServlet {
             // The page variable cannot be null as it is set when the user logs in
             Integer page = (Integer) session.getAttribute("page");
 
-            if(Objects.nonNull(stringPage) && !"".equals(stringPage)) {
+            if(Objects.nonNull(stringPage) && !stringPage.isEmpty()) {
                 page = Parser.parse(stringPage, request, response);
                 int offset = (page - 1) * RECORDS_PER_PAGE;
                 ArrayList<User> users = userDao.getTenRecords(RECORDS_PER_PAGE, offset);
@@ -101,7 +103,7 @@ public class AppList extends HttpServlet {
         if (Objects.nonNull(foundByEmail)) {
             if(foundByEmail.size() >= 50) {
                 request.setAttribute("wideResult", true);
-            } else if (foundByEmail.size() == 0) {
+            } else if (foundByEmail.isEmpty()) {
                 request.setAttribute("userNotFound", true);
             }
 

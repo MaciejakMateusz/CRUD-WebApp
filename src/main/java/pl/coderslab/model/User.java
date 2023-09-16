@@ -12,3 +12,4 @@ public class User {
     private String email, userName, password, creationDate, lastEdited;
     private boolean isAdmin = false;
 }
+
